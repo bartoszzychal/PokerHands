@@ -48,13 +48,9 @@ public class DataFileParser {
 		}
 		return hand;
 	}
-
-	public void close(){
-		try {
-			bufferedReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	
+	public boolean ready() throws IOException{
+		return bufferedReader.ready();
 	}
 
 }

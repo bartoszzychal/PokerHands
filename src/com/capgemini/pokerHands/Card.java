@@ -17,7 +17,7 @@ public class Card {
 	}
 
 	public Integer getValue() {
-		return value.getCardValue();
+		return value.intValue();
 	}
 	
 	public Integer getColor() {

@@ -12,7 +12,7 @@ public enum CardValue {
 		this.valueStr = valueStr;
 	}
 
-	public Integer getCardValue() {
+	public Integer intValue() {
 		return value;
 	}
 	

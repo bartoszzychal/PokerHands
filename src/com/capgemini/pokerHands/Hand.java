@@ -1,67 +1,79 @@
 package com.capgemini.pokerHands;
 
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 
-public class Hand{
+public class Hand implements Comparable<Hand>{
 		
 	private final int INITIAL_APPEARANCE_COUNTER = 1;
-
+	
 	private LinkedList<Card> hand = new LinkedList<>();
+	private List<Map.Entry<CardValue,Integer>> listAppearance;
 	
-	public boolean isColor(){
-		Integer color = hand.get(0).getColor();
-		for(Card card :hand){
-			if(!card.getColor().equals(color)){
-				return false;
-			}
-		}
-		return true;
-	}
 	
-	public boolean isStrit(){
+	public void prepareHandToCompare() {
 		sort();
-		return  hand.getFirst().getValue() - hand.getLast().getValue() == 4;
+		createSortByAppearanceEntryList();
 	}
-	
-	public boolean isPoker(){
-		return isColor()&&isStrit();
-	}
-	
+
 	private void sort() {
 		hand.sort((c1,c2)->c2.getValue().compareTo(c1.getValue()));
 	}
 	
-	private Comparator<CardValue> sortByGreater = new Comparator<CardValue>() {
-		@Override
-		public int compare(CardValue value1, CardValue value2) {
-			return value2.getCardValue().compareTo(value1.getCardValue());
-		}
-	
-	};
-	
-	public Map<CardValue, Integer> createAppearanceMap() {
-		
-		Map<CardValue, Integer> map = new TreeMap<>(sortByGreater);
-		
-		hand.forEach((card)->{
-			CardValue value = card.getCardValue();
-			if(map.containsKey(value)){
-				Integer appearance = map.get(value);
-				appearance++;
-				map.replace(value, appearance);
-			}else{
-				map.put(value, INITIAL_APPEARANCE_COUNTER);
-			}
+	private void createSortByAppearanceEntryList() {
+		Map<CardValue, Integer> mapAppearance = createAppearanceMap();
+		listAppearance = new ArrayList<>(mapAppearance.entrySet());
+		listAppearance.sort((e1,e2)->{
+			 int compareAppearance = e2.getValue().compareTo(e1.getValue());
+			 if(compareAppearance == 0){
+				 return e2.getKey().compareTo(e1.getKey());
+			 }
+			 return compareAppearance;
 		});
-		return map;
 	}
 	
+	private Map<CardValue, Integer> createAppearanceMap() {
+		Map<CardValue,Integer> mapAppearance = new TreeMap<>(); 
+		hand.forEach((card)->{
+			CardValue value = card.getCardValue();
+			if(mapAppearance.containsKey(value)){
+				Integer appearance = mapAppearance.get(value);
+				appearance++;
+				mapAppearance.replace(value, appearance);
+			}else{
+				mapAppearance.put(value, INITIAL_APPEARANCE_COUNTER);
+			}
+		});
+		return mapAppearance;
+	}
+	
+	public List<Map.Entry<CardValue, Integer>> getListAppearance() {
+		return listAppearance;
+	}
+	
+	public LinkedList<Card> getCardList() {
+		return hand;
+	}
+
 	public void addCard(Card card){
 		hand.add(card);
 	}
-		
+	
+	@Override
+	public int compareTo(Hand secondHand) {
+		prepareHandToCompare();
+		secondHand.prepareHandToCompare();
+			
+		int compareHand = HandAnalyzer.analyzeHand(this).compareTo(HandAnalyzer.analyzeHand(secondHand));
+		if(compareHand == 0){
+			return HandAnalyzer.findHigherCard(this,secondHand);
+		}
+		return compareHand;
+	}
+
 }

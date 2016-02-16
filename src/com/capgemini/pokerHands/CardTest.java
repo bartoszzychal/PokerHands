@@ -9,7 +9,7 @@ public class CardTest {
 	@Test
 	public void shouldBeValue2andColor1ForDueceDiamonds() {
 		//given
-		Integer value_ex = CardValue.TWO.getCardValue();
+		Integer value_ex = CardValue.TWO.intValue();
 		Integer color_ex = CardColor.CLUBS.getCardColor();
 	
 		//when
