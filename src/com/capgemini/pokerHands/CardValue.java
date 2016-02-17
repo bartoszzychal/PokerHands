@@ -5,24 +5,24 @@ public enum CardValue {
 	EIGHT(8,"8"), NINE(9,"9"), TEEN(10,"T"), JACK(11,"J"), QUEEN(12,"Q"), KING(13,"K"), ACE(14,"A");
 
 	private Integer value;
-	private String valueStr;
+	private String stringValue;
 	
-	private CardValue(int value, String valueStr) {
+	private CardValue(int value, String stringValue) {
 		this.value = value;
-		this.valueStr = valueStr;
+		this.stringValue = stringValue;
 	}
 
-	public Integer intValue() {
+	public Integer getIntegerValue() {
 		return value;
 	}
 	
-	private String getCardValueStr(){
-		return valueStr;
+	private String getStringValue(){
+		return stringValue;
 	}
-	
-	public static CardValue getValueForColorString(String valueStr){
+		
+	public static CardValue getIntegerColorForStringColor(String valueStr){
 		for (CardValue value: CardValue.values()) {
-			if(value.getCardValueStr().equals(valueStr)){
+			if(value.getStringValue().equals(valueStr)){
 				return value;
 			}
 		}

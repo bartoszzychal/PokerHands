@@ -5,24 +5,24 @@ public enum CardColor {
 	DIAMONDS (1,"D"), CLUBS(2,"C"), SPADES(3,"S"),HEARTS(4,"H");
 	
 	private Integer color;
-	private String colorStr;
+	private String stringColor;
 	
-	private CardColor(Integer color, String colorStr){
+	private CardColor(Integer color, String strColor){
 		this.color = color;
-		this.colorStr = colorStr;
+		this.stringColor = strColor;
 	}
 		
-	public Integer getCardColor(){
+	public Integer getIntegerValue(){
 		return color;
 	}
 	
-	private String getCardColorStr(){
-		return colorStr;
+	private String getStringValue(){
+		return stringColor;
 	}
 	
-	public static CardColor getValueForColorString(String colorStr){
+	public static CardColor getIntegerValueForStringValue(String colorStr){
 		for (CardColor color : CardColor.values()) {
-			if(color.getCardColorStr().equals(colorStr)){
+			if(color.getStringValue().equals(colorStr)){
 				return color;
 			}
 		}

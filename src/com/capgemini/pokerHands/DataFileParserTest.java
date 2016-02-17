@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -71,13 +72,12 @@ public class DataFileParserTest {
 		expected_hands.add(second);
 
 		DataFileParser dataFileParser = new DataFileParser();
-		dataFileParser.prepareParser("poker_every_diff.txt");
+		dataFileParser.prepareParser("two_hand.txt");
 
 		// when
 		ArrayList<Hand> readNextRound = dataFileParser.readNextRound();
 
 		// then
-
 		assertArrayEquals(expected_hands.toArray(), readNextRound.toArray());
 	}
 

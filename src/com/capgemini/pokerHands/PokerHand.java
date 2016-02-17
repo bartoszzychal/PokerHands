@@ -1,8 +1,6 @@
 package com.capgemini.pokerHands;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 public class PokerHand {
 
@@ -10,18 +8,20 @@ public class PokerHand {
 	private ArrayList<Hand> round;
 	private Hand handFirst;
 	private Hand handSecond;
-
+	
 	public PokerHand(String file) throws IOException {
 		parser.prepareParser(file);
 	}
 
-	public int getWinner() throws IOException{
-		int winner = 0; //negative second , positive first
+	public int getNumberOfWonRoundByFirstPlayer() throws IOException{
+		int numberOfRoundWonByFirstPlayer = 0;
 		while(parser.ready()){
 			nextRound();
-			winner+=getWinnerRound();
+			if(getWinnerRound()>0){
+				numberOfRoundWonByFirstPlayer++;
+			}
 		}
-		return winner;
+		return numberOfRoundWonByFirstPlayer;
 	}
 	
 	private void nextRound() throws IOException {

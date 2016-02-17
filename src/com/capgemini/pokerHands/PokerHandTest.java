@@ -16,9 +16,9 @@ public class PokerHandTest {
 		
 		PokerHand poker = new PokerHand(file);
 		//when
-		int winner = poker.getWinner();
+		int winner = poker.getNumberOfWonRoundByFirstPlayer();
 		//then
-		assertEquals(-248,winner);
+		assertEquals(376,winner);
 	}
 	@Test
 	public void shouldWinFirst45Times() throws IOException {
@@ -27,7 +27,7 @@ public class PokerHandTest {
 		
 		PokerHand poker = new PokerHand(testfile);
 		//when
-		int winner = poker.getWinner();
+		int winner = poker.getNumberOfWonRoundByFirstPlayer();
 		//then
 		assertEquals(46,winner);
 	}
@@ -38,7 +38,7 @@ public class PokerHandTest {
 		
 		PokerHand poker = new PokerHand(testfile);
 		//when
-		int winner = poker.getWinner();
+		int winner = poker.getNumberOfWonRoundByFirstPlayer();
 		//then
 		assertEquals(4,winner);
 	}
@@ -50,18 +50,18 @@ public class PokerHandTest {
 	@Test
 	public void shouldBeIOException() throws IOException {
 		PokerHand pokerHand = new PokerHand("poker_empty_file.txt");
-		int winner = pokerHand.getWinner();
+		int winner = pokerHand.getNumberOfWonRoundByFirstPlayer();
 		assertEquals(0, winner);
 	}
 	@Test(expected=IllegalArgumentException.class)
 	public void shouldBeIllegalArgumentExceptionForColor() throws IOException {
 		PokerHand pokerHand = new PokerHand("exception_test_illegal_color.txt");
-		pokerHand.getWinner();
+		pokerHand.getNumberOfWonRoundByFirstPlayer();
 	}
 	@Test(expected=IllegalArgumentException.class)
 	public void shouldBeIllegalArgumentExceptionForValue() throws IOException {
 		PokerHand pokerHand = new PokerHand("exception_test_illegal_value.txt");
-		pokerHand.getWinner();
+		pokerHand.getNumberOfWonRoundByFirstPlayer();
 	}
 	
 

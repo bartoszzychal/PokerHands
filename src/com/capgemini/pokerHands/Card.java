@@ -17,11 +17,11 @@ public class Card {
 	}
 
 	public Integer getValue() {
-		return value.intValue();
+		return value.getIntegerValue();
 	}
 	
 	public Integer getColor() {
-		return color.getCardColor();
+		return color.getIntegerValue();
 	}
 	
 	public CardValue getCardValue(){

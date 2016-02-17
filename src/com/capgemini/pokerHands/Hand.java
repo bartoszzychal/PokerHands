@@ -12,26 +12,38 @@ public class Hand implements Comparable<Hand>{
 		
 	private final int INITIAL_APPEARANCE_COUNTER = 1;
 	
-	private LinkedList<Card> hand = new LinkedList<>();
+	private LinkedList<Card> listCards = new LinkedList<>();
 	private List<Map.Entry<CardValue,Integer>> listAppearance;
 	
+	@Override
+	public int compareTo(Hand secondHand) {
+		prepareHandToCompare();
+		secondHand.prepareHandToCompare();
+			
+		int compareHand = HandAnalyzer.getScoreForHand(this).compareTo(HandAnalyzer.getScoreForHand(secondHand));
+		if(compareHand == 0){
+			return HandAnalyzer.findHigherCard(this,secondHand);
+		}
+		return compareHand;
+	}
 	
-	public void prepareHandToCompare() {
+	private void prepareHandToCompare() {
 		sort();
-		createSortByAppearanceEntryList();
+		createSortByAppearanceAndByCardValueEntryList();
 	}
 
 	private void sort() {
-		hand.sort((c1,c2)->c2.getValue().compareTo(c1.getValue()));
+		listCards.sort((c1,c2)->c2.getValue().compareTo(c1.getValue()));
 	}
 	
-	private void createSortByAppearanceEntryList() {
+	private void createSortByAppearanceAndByCardValueEntryList() {
 		Map<CardValue, Integer> mapAppearance = createAppearanceMap();
 		listAppearance = new ArrayList<>(mapAppearance.entrySet());
 		listAppearance.sort((e1,e2)->{
 			 int compareAppearance = e2.getValue().compareTo(e1.getValue());
 			 if(compareAppearance == 0){
-				 return e2.getKey().compareTo(e1.getKey());
+				 int compareCardValue = e2.getKey().compareTo(e1.getKey());
+				 return compareCardValue;
 			 }
 			 return compareAppearance;
 		});
@@ -39,7 +51,7 @@ public class Hand implements Comparable<Hand>{
 	
 	private Map<CardValue, Integer> createAppearanceMap() {
 		Map<CardValue,Integer> mapAppearance = new TreeMap<>(); 
-		hand.forEach((card)->{
+		listCards.forEach((card)->{
 			CardValue value = card.getCardValue();
 			if(mapAppearance.containsKey(value)){
 				Integer appearance = mapAppearance.get(value);
@@ -52,28 +64,44 @@ public class Hand implements Comparable<Hand>{
 		return mapAppearance;
 	}
 	
-	public List<Map.Entry<CardValue, Integer>> getListAppearance() {
+	public List<Map.Entry<CardValue, Integer>> getSortedByAppearanceAndCardValueEntryList() {
 		return listAppearance;
 	}
 	
 	public LinkedList<Card> getCardList() {
-		return hand;
+		return listCards;
 	}
 
 	public void addCard(Card card){
-		hand.add(card);
+		listCards.add(card);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((listCards == null) ? 0 : listCards.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Hand other = (Hand) obj;
+		if (listCards == null) {
+			if (other.listCards != null)
+				return false;
+		} else if (!listCards.equals(other.listCards))
+			return false;
+		return true;
 	}
 	
-	@Override
-	public int compareTo(Hand secondHand) {
-		prepareHandToCompare();
-		secondHand.prepareHandToCompare();
-			
-		int compareHand = HandAnalyzer.analyzeHand(this).compareTo(HandAnalyzer.analyzeHand(secondHand));
-		if(compareHand == 0){
-			return HandAnalyzer.findHigherCard(this,secondHand);
-		}
-		return compareHand;
-	}
+	
+
 
 }
