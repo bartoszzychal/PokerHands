@@ -13,11 +13,11 @@ public class Hand implements Comparable<Hand>{
 	private final int INITIAL_APPEARANCE_COUNTER = 1;
 	
 	private LinkedList<Card> listCards = new LinkedList<>();
-	private List<Map.Entry<CardValue,Integer>> listAppearanceCardValue;
+	private List<Map.Entry<CardValue,Integer>> listAppearanceCardValue = new ArrayList<>();
 	
 	@Override
 	public int compareTo(Hand secondHand) {
-		this.prepareHandToCompare();
+		prepareHandToCompare();
 		secondHand.prepareHandToCompare();
 			
 		int compareHand = HandAnalyzer.getScoreForHand(this).compareTo(HandAnalyzer.getScoreForHand(secondHand));
@@ -28,28 +28,21 @@ public class Hand implements Comparable<Hand>{
 	}
 	
 	private void prepareHandToCompare() {
-		sort();
-		createSortByAppearanceAndByCardValueEntryList();
+		sortCardsByValue();
+		createListAppearanceCardValue();
+		sortListAppearenceCardValueByAppearenceAndByValue();
 	}
 
-	private void sort() {
+	private void sortCardsByValue() {
 		listCards.sort((c1,c2)->c2.getValue().compareTo(c1.getValue()));
 	}
 	
-	private void createSortByAppearanceAndByCardValueEntryList() {
-		Map<CardValue, Integer> mapAppearance = createAppearanceMap();
-		listAppearanceCardValue = new ArrayList<>(mapAppearance.entrySet());
-		listAppearanceCardValue.sort((e1,e2)->{
-			 int compareAppearance = e2.getValue().compareTo(e1.getValue());
-			 if(compareAppearance == 0){
-				 int compareCardValue = e2.getKey().compareTo(e1.getKey());
-				 return compareCardValue;
-			 }
-			 return compareAppearance;
-		});
+	private void createListAppearanceCardValue() {
+		Map<CardValue, Integer> mapAppearance = createMapAppearance();
+		listAppearanceCardValue.addAll(mapAppearance.entrySet());
 	}
 	
-	private Map<CardValue, Integer> createAppearanceMap() {
+	private Map<CardValue, Integer> createMapAppearance() {
 		Map<CardValue,Integer> mapAppearance = new TreeMap<>(); 
 		listCards.forEach((card)->{
 			CardValue value = card.getCardValue();
@@ -62,6 +55,17 @@ public class Hand implements Comparable<Hand>{
 			}
 		});
 		return mapAppearance;
+	}
+
+	private void sortListAppearenceCardValueByAppearenceAndByValue() {
+		listAppearanceCardValue.sort((e1,e2)->{
+			 int compareAppearance = e2.getValue().compareTo(e1.getValue());
+			 if(compareAppearance == 0){
+				 int compareCardValue = e2.getKey().compareTo(e1.getKey());
+				 return compareCardValue;
+			 }
+			 return compareAppearance;
+		});
 	}
 	
 	public List<Map.Entry<CardValue, Integer>> getSortedByAppearanceAndCardValueEntryList() {
