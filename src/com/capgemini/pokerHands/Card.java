@@ -56,4 +56,5 @@ public class Card {
 			return false;
 		return true;
 	}	
+	
 }
