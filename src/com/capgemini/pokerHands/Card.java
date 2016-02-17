@@ -31,12 +31,7 @@ public class Card {
 	public CardColor getCardColor(){
 		return color;
 	}
-
-	@Override
-	public String toString() {
-		return "Card [value=" + value + ", color=" + color + "]";
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
