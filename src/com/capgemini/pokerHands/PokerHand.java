@@ -34,3 +34,4 @@ public class PokerHand {
 		return handFirst.compareTo(handSecond);
 	}
 }
+
