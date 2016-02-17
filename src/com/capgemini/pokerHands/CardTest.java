@@ -24,5 +24,4 @@ public class CardTest {
 		//when
 		new Card(null,CardColor.CLUBS);
 	}
-
 }

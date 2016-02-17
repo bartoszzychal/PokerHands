@@ -8,11 +8,9 @@ import java.util.Arrays;
 
 public class DataFileParser {
 	
-	
 	private static final String SPACE = " ";
 	private FileReader fileReader;
 	private BufferedReader bufferedReader;
-
 	
 	public Boolean prepareParser(String file) throws IOException{
 		this.fileReader = new FileReader(file);

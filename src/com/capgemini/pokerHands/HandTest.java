@@ -32,6 +32,4 @@ public class HandTest {
 		//then
 		assertTrue(CardValue.FOUR.equals(valueOfHigherPair)&&CardValue.THREE.equals(valueOfLowerPair));
 	}
-	
-	
 }

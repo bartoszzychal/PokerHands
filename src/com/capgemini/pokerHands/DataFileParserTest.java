@@ -23,7 +23,6 @@ public class DataFileParserTest {
 
 		// then
 		assertEquals(prepareReaderExpected, prepareReader);
-
 	}
 
 	@Test
@@ -38,7 +37,6 @@ public class DataFileParserTest {
 
 		// then
 		assertEquals(prepareReaderExpected, prepareReader);
-
 	}
 
 	@Test(expected = FileNotFoundException.class)

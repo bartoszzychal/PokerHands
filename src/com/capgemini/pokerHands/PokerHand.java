@@ -33,6 +33,4 @@ public class PokerHand {
 	private int getWinnerRound(){
 		return handFirst.compareTo(handSecond);
 	}
-
-	
 }

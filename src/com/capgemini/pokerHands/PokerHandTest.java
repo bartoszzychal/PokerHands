@@ -53,6 +53,4 @@ public class PokerHandTest {
 		pokerHand.getNumberOfWonRoundByFirstPlayer();
 	}
 	
-
-
 }
