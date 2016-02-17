@@ -22,7 +22,7 @@ public class DataFileParserTest {
 		boolean prepareReader = false;
 		boolean prepareReaderExpected = true;
 		// when
-		prepareReader = dataFileParser.prepareParser("poker.txt");
+		prepareReader = dataFileParser.prepareParser("test_files/poker.txt");
 
 		// then
 		assertEquals(prepareReaderExpected, prepareReader);
@@ -37,7 +37,7 @@ public class DataFileParserTest {
 		boolean prepareReader = true;
 		boolean prepareReaderExpected = false;
 		// when
-		prepareReader = dataFileReader.prepareParser("poker_empty_file.txt");
+		prepareReader = dataFileReader.prepareParser("test_files/poker_empty_file.txt");
 
 		// then
 		assertEquals(prepareReaderExpected, prepareReader);
@@ -72,7 +72,7 @@ public class DataFileParserTest {
 		expected_hands.add(second);
 
 		DataFileParser dataFileParser = new DataFileParser();
-		dataFileParser.prepareParser("two_hand.txt");
+		dataFileParser.prepareParser("test_files/two_hand.txt");
 
 		// when
 		ArrayList<Hand> readNextRound = dataFileParser.readNextRound();

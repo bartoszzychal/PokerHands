@@ -13,11 +13,11 @@ public class Hand implements Comparable<Hand>{
 	private final int INITIAL_APPEARANCE_COUNTER = 1;
 	
 	private LinkedList<Card> listCards = new LinkedList<>();
-	private List<Map.Entry<CardValue,Integer>> listAppearance;
+	private List<Map.Entry<CardValue,Integer>> listAppearanceCardValue;
 	
 	@Override
 	public int compareTo(Hand secondHand) {
-		prepareHandToCompare();
+		this.prepareHandToCompare();
 		secondHand.prepareHandToCompare();
 			
 		int compareHand = HandAnalyzer.getScoreForHand(this).compareTo(HandAnalyzer.getScoreForHand(secondHand));
@@ -38,8 +38,8 @@ public class Hand implements Comparable<Hand>{
 	
 	private void createSortByAppearanceAndByCardValueEntryList() {
 		Map<CardValue, Integer> mapAppearance = createAppearanceMap();
-		listAppearance = new ArrayList<>(mapAppearance.entrySet());
-		listAppearance.sort((e1,e2)->{
+		listAppearanceCardValue = new ArrayList<>(mapAppearance.entrySet());
+		listAppearanceCardValue.sort((e1,e2)->{
 			 int compareAppearance = e2.getValue().compareTo(e1.getValue());
 			 if(compareAppearance == 0){
 				 int compareCardValue = e2.getKey().compareTo(e1.getKey());
@@ -65,7 +65,7 @@ public class Hand implements Comparable<Hand>{
 	}
 	
 	public List<Map.Entry<CardValue, Integer>> getSortedByAppearanceAndCardValueEntryList() {
-		return listAppearance;
+		return listAppearanceCardValue;
 	}
 	
 	public LinkedList<Card> getCardList() {
