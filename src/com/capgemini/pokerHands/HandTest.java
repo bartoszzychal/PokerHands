@@ -26,7 +26,7 @@ public class HandTest {
 		method.invoke(hand);
 		//when
 
-		List<Entry<CardValue, Integer>> listAppearance = hand.getSortedByAppearanceAndCardValueEntryList();
+		List<Entry<CardValue, Integer>> listAppearance = hand.getListAppearanceCardValue();
 		CardValue valueOfHigherPair = listAppearance.get(0).getKey();
 		CardValue valueOfLowerPair = listAppearance.get(1).getKey();
 		//then

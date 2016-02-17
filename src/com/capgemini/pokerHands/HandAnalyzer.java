@@ -34,8 +34,8 @@ public class HandAnalyzer {
 	}
 	
 	public static int findHigherCard(Hand hand, Hand secondHand) {
-		Iterator<Entry<CardValue, Integer>> iteratorHand = hand.getSortedByAppearanceAndCardValueEntryList().iterator();
-		Iterator<Entry<CardValue, Integer>> iteratorSecondHand = secondHand.getSortedByAppearanceAndCardValueEntryList().iterator();
+		Iterator<Entry<CardValue, Integer>> iteratorHand = hand.getListAppearanceCardValue().iterator();
+		Iterator<Entry<CardValue, Integer>> iteratorSecondHand = secondHand.getListAppearanceCardValue().iterator();
 		while(iteratorHand.hasNext()&&iteratorSecondHand.hasNext()){
 			int compareValue = iteratorHand.next().getKey().getIntegerValue().compareTo(iteratorSecondHand.next().getKey().getIntegerValue());
 			if(compareValue!=0){
@@ -53,7 +53,7 @@ public class HandAnalyzer {
 	}
 
 	private static boolean isFour(Hand hand) {
-		return hand.getSortedByAppearanceAndCardValueEntryList().get(0).getValue() == FOUR_CARD_THE_SAME_VALUE;
+		return hand.getListAppearanceCardValue().get(0).getValue() == FOUR_CARD_THE_SAME_VALUE;
 	}
 
 	private static int getScoreForFullHouse(Hand hand) {
@@ -64,7 +64,7 @@ public class HandAnalyzer {
 	}
 
 	private static boolean isFullHouse(Hand hand) {
-		List<Entry<CardValue, Integer>> listAppearance = hand.getSortedByAppearanceAndCardValueEntryList();
+		List<Entry<CardValue, Integer>> listAppearance = hand.getListAppearanceCardValue();
 		return listAppearance.size() == TWO_CARD_THE_SAME_VALUE && listAppearance.get(0).getValue() == THREE_CARD_THE_SAME_VALUE;
 	}
 	
@@ -95,7 +95,7 @@ public class HandAnalyzer {
 	private static boolean isStraight(Hand hand) {
 		return (hand.getCardList().getFirst().getValue() - hand.getCardList().getLast().getValue()
 				== DIFFERENCE_BEETWEEN_VALUE_FIRST_CARD_AND_VALUE_LAST_CARD_IS_FOUR)
-				&& (hand.getSortedByAppearanceAndCardValueEntryList().size() == FIVE_DIFFERENT_VALUE_CARD);
+				&& (hand.getListAppearanceCardValue().size() == FIVE_DIFFERENT_VALUE_CARD);
 	}
 
 	private static int getScoreForThreeOfKind(Hand hand) {
@@ -106,7 +106,7 @@ public class HandAnalyzer {
 	}
 
 	private static boolean isThreeOfKind(Hand hand) {
-		return hand.getSortedByAppearanceAndCardValueEntryList().get(0).getValue().equals(THREE_CARD_THE_SAME_VALUE) && hand.getSortedByAppearanceAndCardValueEntryList().size() == THREE_DIFFERENT_VALUE_CARD;
+		return hand.getListAppearanceCardValue().get(0).getValue().equals(THREE_CARD_THE_SAME_VALUE) && hand.getListAppearanceCardValue().size() == THREE_DIFFERENT_VALUE_CARD;
 	}
 
 	private static int getScoreForTwoPairs(Hand hand) {
@@ -117,8 +117,8 @@ public class HandAnalyzer {
 	}
 
 	private static boolean isTwoPairs(Hand hand) {
-		return hand.getSortedByAppearanceAndCardValueEntryList().get(0).getValue().equals(TWO_CARD_THE_SAME_VALUE)
-				&& hand.getSortedByAppearanceAndCardValueEntryList().get(1).getValue().equals(TWO_CARD_THE_SAME_VALUE);
+		return hand.getListAppearanceCardValue().get(0).getValue().equals(TWO_CARD_THE_SAME_VALUE)
+				&& hand.getListAppearanceCardValue().get(1).getValue().equals(TWO_CARD_THE_SAME_VALUE);
 	}
 
 	private static int getScoreForOnePair(Hand hand) {
@@ -129,7 +129,7 @@ public class HandAnalyzer {
 	}
 
 	private static boolean isPair(Hand hand) {
-		return hand.getSortedByAppearanceAndCardValueEntryList().size() == FOUR_DIFFERENT_VALUE_CARD;
+		return hand.getListAppearanceCardValue().size() == FOUR_DIFFERENT_VALUE_CARD;
 	}
 
 }
