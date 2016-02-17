@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
 public class Hand implements Comparable<Hand>{
 		
@@ -17,14 +15,20 @@ public class Hand implements Comparable<Hand>{
 	
 	@Override
 	public int compareTo(Hand secondHand) {
-		prepareHandToCompare();
-		secondHand.prepareHandToCompare();
-			
-		int compareHand = HandAnalyzer.getScoreForHand(this).compareTo(HandAnalyzer.getScoreForHand(secondHand));
-		if(compareHand == 0){
+		prepareHandsToCompare(secondHand);	
+		if(HandAnalyzer.getScoreForHand(this).compareTo(HandAnalyzer.getScoreForHand(secondHand)) == 0){
 			return HandAnalyzer.findHigherCard(this,secondHand);
 		}
-		return compareHand;
+		return HandAnalyzer.getScoreForHand(this).compareTo(HandAnalyzer.getScoreForHand(secondHand));
+	}
+
+	private void prepareHandsToCompare(Hand secondHand) {
+		if(listAppearanceCardValue.isEmpty()){
+			prepareHandToCompare();
+		}
+		if(secondHand.getListAppearanceCardValue().isEmpty()){
+			secondHand.prepareHandToCompare();
+		}
 	}
 	
 	private void prepareHandToCompare() {
@@ -68,7 +72,7 @@ public class Hand implements Comparable<Hand>{
 		});
 	}
 	
-	public List<Map.Entry<CardValue, Integer>> getSortedByAppearanceAndCardValueEntryList() {
+	public List<Map.Entry<CardValue, Integer>> getListAppearanceCardValue() {
 		return listAppearanceCardValue;
 	}
 	
