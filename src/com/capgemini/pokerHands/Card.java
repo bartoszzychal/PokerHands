@@ -1,6 +1,5 @@
 package com.capgemini.pokerHands;
 
-//FIX REVIEW bzychal - why this class is not comparable?
 public class Card implements Comparable<Card> {
 
     private final CardValue value;

@@ -7,13 +7,10 @@ public class CardParser {
     }
 
     private static CardColor getColor(String card) {
-        //FIX REVIEW bzychal - there is a dedicated method for build the enum value out of the name, please see below.
-        // getIntegerValueForStringValue(card.substring(1,2));
     	return CardColor.valueOf(card.substring(1, 2));
     }
 
     private static CardValue getValue(String card) {
-    	//FIX cannot create numeric enum, so this enum must be like past
-        return CardValue.getValueOf(card.substring(0,1)); //getIntegerColorForStringColor(card.substring(0, 1));
+        return CardValue.getValueOf(card.substring(0,1));
     }
 }

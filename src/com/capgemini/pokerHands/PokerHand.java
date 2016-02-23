@@ -6,7 +6,6 @@ import java.util.List;
 public class PokerHand {
 
 	private final DataFileParser parser = new DataFileParser();
-	// FIX REVIEW bzychal - please use List<Hand> as type
 	private List<Hand> round;
 	private Hand handFirst;
 	private Hand handSecond;

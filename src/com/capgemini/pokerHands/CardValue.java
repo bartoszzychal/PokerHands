@@ -23,7 +23,11 @@ public enum CardValue {
 	}
 		
 	public static CardValue getValueOf(String valueStr){
-		return Arrays.asList(CardValue.values()).stream().filter((value)->value.getStringValue().equals(valueStr)).findFirst().get();
+		return Arrays.asList(CardValue.values())
+				.stream()
+				.filter((value)->value.getStringValue().equals(valueStr))
+				.findFirst()
+				.get();
 	}
 
 }

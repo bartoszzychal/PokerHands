@@ -8,7 +8,6 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
-//FIX REVIEW bzychal - failing tests here
 public class PokerHandTest {
 
     @Test

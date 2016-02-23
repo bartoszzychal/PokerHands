@@ -23,9 +23,6 @@ public class HandAnalyzer {
 	private static final int TWO_CARD_THE_SAME_VALUE = 2;
 	private static final int DIFFERENCE_BEETWEEN_VALUE_FIRST_CARD_AND_VALUE_LAST_CARD_IS_FOUR = 4;
 
-	//FIX REVIEW bzychal - the cases in this method are exclusive, it is
-	// unnecessary to execute all of them, first match
-	// should return value
 	public static Integer getScoreForHand(Hand hand) {
 		int score = 0;
 		if (isPair(hand)) {
