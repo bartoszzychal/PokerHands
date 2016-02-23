@@ -52,9 +52,9 @@ public class Hand implements Comparable<Hand> {
             CardValue value = card.getCardValue();
             if (mapAppearance.containsKey(value)) {
                 Integer appearance = mapAppearance.get(value);
-                // REVIEW bzychal - for readability reasons better please avoid the line below, it is better to pass
+                //FIX REVIEW bzychal - for readability reasons better please avoid the line below, it is better to pass
                 // appearane + 1 in the next line
-                appearance++;
+                appearance += 1;
                 mapAppearance.replace(value, appearance);
             }
             else {

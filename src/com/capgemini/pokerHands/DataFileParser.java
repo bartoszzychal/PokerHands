@@ -26,11 +26,10 @@ public class DataFileParser {
         ArrayList<String> first = new ArrayList<>(cards.subList(0, 5));
         ArrayList<String> second = new ArrayList<>(cards.subList(5, 10));
 
-        Hand firstHand = getHand(first);
+        Hand firstHand = getHand(first);        
         Hand secondHand = getHand(second);
 
         ArrayList<Hand> nextRound = new ArrayList<>();
-
         nextRound.add(firstHand);
         nextRound.add(secondHand);
 
@@ -39,11 +38,7 @@ public class DataFileParser {
 
     private Hand getHand(ArrayList<String> handStr) {
         Hand hand = new Hand();
-        // REVIEW bzychal - please use Java8 lambda
-        for (String cardStr : handStr) {
-            Card card = CardParser.parseString(cardStr);
-            hand.addCard(card);
-        }
+        handStr.stream().map((card)->CardParser.parseString(card)).forEach((card)->hand.addCard(card));
         return hand;
     }
 

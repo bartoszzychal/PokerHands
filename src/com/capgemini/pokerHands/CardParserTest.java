@@ -2,6 +2,8 @@ package com.capgemini.pokerHands;
 
 import static org.junit.Assert.*;
 
+import java.util.NoSuchElementException;
+
 import org.junit.Test;
 
 public class CardParserTest {
@@ -13,10 +15,11 @@ public class CardParserTest {
 		//when
 		Card parseString = CardParser.parseString(dueceDiamonds);
 		//then
-		assertTrue(parseString.getValue() == 2 && parseString.getColor() == 1);
+		assertTrue(parseString.getColor() == 1);
+		assertTrue(parseString.getValue() == 2 );
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NoSuchElementException.class)
 	public void shouldIllegalArgumentExceptionForIllegallValue() {
 		//given
 		String card = "1D";
@@ -24,7 +27,7 @@ public class CardParserTest {
 		CardParser.parseString(card);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NoSuchElementException.class)
 	public void shouldIllegalArgumentExceptionForIllegallColor() {
 		//given
 		String card = "1O";

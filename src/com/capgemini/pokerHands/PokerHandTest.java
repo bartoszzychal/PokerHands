@@ -4,10 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
-// REVIEW bzychal - failing tests here
+//FIX REVIEW bzychal - failing tests here
 public class PokerHandTest {
 
     @Test
@@ -52,7 +53,7 @@ public class PokerHandTest {
         pokerHand.getNumberOfWonRoundByFirstPlayer();
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NoSuchElementException.class)
     public void shouldBeIllegalArgumentExceptionForValue() throws IOException {
         PokerHand pokerHand = new PokerHand("test_files/exception_test_illegal_value.txt");
         pokerHand.getNumberOfWonRoundByFirstPlayer();

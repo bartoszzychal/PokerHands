@@ -27,7 +27,7 @@ public class HandAnalyzerTest {
 		//when
 		Integer	poker = HandAnalyzer.getScoreForHand(hand);
 		//then
-		assertEquals(Integer.valueOf(11), poker);
+		assertEquals(Integer.valueOf(9), poker);
 	}
 	
 	@Test

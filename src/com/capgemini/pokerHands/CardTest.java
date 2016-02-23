@@ -24,4 +24,11 @@ public class CardTest {
         // when
         new Card(null, CardColor.C);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldIllegalArgumentExceptionForIllegallColor() {
+    	
+    	// when
+    	new Card(CardValue.ACE,null);
+    }
 }
